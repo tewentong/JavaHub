@@ -1,0 +1,11 @@
+线程的命名与取得
+    多线程的运行状态是不确定的，为了在程序的开发之中可以获取到一些需要使用的线程，就只能够依靠线程的名字进行操作
+    线程的名字至关重要，在Thread类中提供有线程名称的处理
+
+    构造方法： public Thread(Runnable target, String name);
+    设置名字： public final void setName(String name);
+    取得名字： public final String getName();
+
+    对于线程对象的获得不可能仅仅依靠this完成，因为线程的状态不可控，但是有一点是明确的，所有的线程对象一定要执行run()方法。
+    那么这个时候可以考虑获取当前线程，在Thread类中提供有获取当前线程的方法
+        获取当前线程： public static Thread currentThread();
