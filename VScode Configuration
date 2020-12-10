@@ -1,0 +1,19 @@
+{   "files.autoGuessEncoding": true,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "java.home": "/usr/local/jdk1.8",
+    "java.semanticHighlighting.enabled": true,
+    "java.configuration.checkProjectSettingsExclusions": false,
+    "java.requirements.JDK11Warning": false,
+    "editor.fontSiz": 18,
+    "window.zoomLevel": 0,
+    "notebook.kernelProviderAssociations": [],
+    "java.test.config": {},
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-1.8",
+            "path": "/usr/local/jdk1.8",
+            "default":true,
+        }
+    ]
+}
