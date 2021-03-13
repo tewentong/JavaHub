@@ -83,7 +83,7 @@
                     }
                 }
                 这种代码你只需要清楚可以根据反射获取方法的结构即可，不需要做过多的深入了解，
-                    但是在Method类里面，有一个致命的重要方法：
+                    但是在Method类里面，有一个致命的重要方法：反射调用类中的方法
                         public Object invoke(Object obj, Object... args) 
                                         throws IllegalAccessException,
                                                 IllegalArgumentException,
