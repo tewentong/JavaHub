@@ -119,16 +119,16 @@ class Company0314 {
 }
 
 class Dept0314 {
-    private String name;
+    private String dname;
     private String loc;
     private Company0314 company;
 
-    public String getName() {
-        return name;
+    public String getDname() {
+        return dname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String dname) {
+        this.dname = dname;
     }
 
     public String getLoc() {
@@ -213,15 +213,24 @@ class BeanUtils0314 { // 进行Bean处理的类
                             Field field = currentObject.getClass().getDeclaredField(temp[y]); // 获取属性类型
                             Method method = currentObject.getClass()
                                     .getDeclaredMethod("set" + StringUtils0314.initcap(temp[y]), field.getType());
-                            System.out.println(method);
                             Object newObject = field.getType().getDeclaredConstructor().newInstance();
                             method.invoke(currentObject, newObject);
                             currentObject = newObject;
+                            // 当此时代码循环处理完成之后，currentObject表示的就是可以进行setter方法调用的对象了
+                            // 并且理论上该对象一定不可能为null
+                            // 随后就可以按照之前的处理方式利用对象进行setter方法调用
+
                         } else {
                             currentObject = tempObject;
                         }
                         System.out.println(temp[y] + " -- " + currentObject);
                     }
+                    // 进行属性内容的设置
+                    Field field = currentObject.getClass().getDeclaredField(temp[temp.length - 1]); // 获取成员
+                    Method setMethod = currentObject.getClass()
+                            .getDeclaredMethod("set" + StringUtils0314.initcap(temp[temp.length - 1]), field.getType());
+                    Object convertValue = BeanUtils0314.convertAttributeValue(field.getType().getName(), attval[1]);
+                    setMethod.invoke(currentObject, convertValue); // 调用setter方法设置内容
                 } else {
                     Field field = obj.getClass().getDeclaredField(attval[0]); // 获取成员
                     Method setMethod = obj.getClass().getDeclaredMethod("set" + StringUtils0314.initcap(attval[0]),
@@ -230,7 +239,7 @@ class BeanUtils0314 { // 进行Bean处理的类
                     setMethod.invoke(obj, convertValue); // 调用setter方法设置内容
                 }
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
     }
@@ -269,7 +278,7 @@ public class CascadeObjectInstantiationDemo {
         Emp0314 emp = ClassInstanceFactory0314.create(Emp0314.class, value);
         System.out.println("雇员编号： " + emp.getEmpno() + "姓名： " + emp.getEname() + "、职位：" + emp.getJob() + "、部门："
                 + emp.getDept() + "、薪水： " + emp.getSalary() + "、雇佣日期： " + emp.getHiredate());
-        System.out.println(emp.getDept());
-        System.out.println(emp.getDept().getCompany());
+        System.out.println(emp.getDept().getDname());
+        System.out.println(emp.getDept().getCompany().getName());
     }
 }
