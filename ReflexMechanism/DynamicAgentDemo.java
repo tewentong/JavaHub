@@ -39,7 +39,7 @@ interface IMessage031502 {
     public void send();
 }
 
-class MessageReal031502 implements IMessage0315 {
+class MessageReal031502 implements IMessage031502 {
     @Override
     public void send() {
         System.out.println("【发送消息】www.mldn.cn");
