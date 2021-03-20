@@ -35,6 +35,8 @@
                 server.close();
             }
         }
+
+    UDP发送的数据一定是不可可靠的，但是TCP由于需要保证可靠的连接，所以需要的服务器的资源就越多。
 */
 import java.net.DatagramSocket;
 import java.net.DatagramPacket;
