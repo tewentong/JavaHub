@@ -20,6 +20,10 @@
         table:
             表结构：定义表的列名和列类型
             表记录：一行一行的记录
+
+    登陆:
+        sudo mysql -uroot -ppassword
+
 */
 public class DatabaseIntro {
 
