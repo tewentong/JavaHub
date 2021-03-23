@@ -29,6 +29,16 @@
         sudo service mysql stop
     重启服务：
         sudo service mysql restart
+
+
+    客户端操作：
+        登陆服务器：
+            sudo mysql -uroot -ppassword -hlocalhost
+            -u 后面跟随用户名
+            -p 后面跟随密码
+            -h 后面跟随IP
+        退出服务器：
+            exit或者quit
 */
 public class DatabaseIntro {
 
