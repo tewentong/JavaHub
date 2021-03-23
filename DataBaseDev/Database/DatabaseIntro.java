@@ -23,7 +23,12 @@
 
     登陆:
         sudo mysql -uroot -ppassword
-
+    启动服务：
+        sudo service mysql start
+    停止服务：
+        sudo service mysql stop
+    重启服务：
+        sudo service mysql restart
 */
 public class DatabaseIntro {
 
