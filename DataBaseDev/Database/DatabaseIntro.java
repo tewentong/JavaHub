@@ -34,7 +34,7 @@
             sudo mysql -uroot -ppassword -hlocalhost
             -u 后面跟随用户名
             -p 后面跟随密码
-            -h 后面跟随IP
+            -h 后面跟随IP (root是超级用户，任何IP都可以，如-h127.0.0.1)
         退出服务器：
             exit或者quit
 */
