@@ -21,15 +21,13 @@
             表结构：定义表的列名和列类型
             表记录：一行一行的记录
 
-    登陆:
-        sudo mysql -uroot -ppassword
-    启动服务：
-        sudo service mysql start
-    停止服务：
-        sudo service mysql stop
-    重启服务：
-        sudo service mysql restart
-
+    服务器操作：
+        启动服务：
+            sudo service mysql start
+        停止服务：
+            sudo service mysql stop
+        重启服务：
+            sudo service mysql restart
 
     客户端操作：
         登陆服务器：
