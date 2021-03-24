@@ -13,18 +13,18 @@
             char：固定长度字符串类型   char(255)，数据的长度不足指定长度，补足到指定长度
             varchar：可变长度字符串类型    varchar(65535), zhangsan
             text(clob)：字符串类型
-                很小
-                小
-                中
-                大
+                很小 tinytext 2^8-1B
+                小 text 2^16-1B
+                中 mediumtext 2^24-1B
+                大 longtext 2^32-1B
             blob：字节类型
-                很小
-                小
-                中
-                大
+                很小 tinblob 2^8-1B 
+                小 blob 2^16-1B 
+                中 mediumblob 2^16-1B
+                大 longblob 2^32-1B
             date：日期类型，格式为：yyyy-MM-dd
             time：时间类型，格式为：hh:mm:ss
-            timestamp：时间戳类型
+            timestamp：时间戳类型（年月日+时分秒）
         3.表
             创建表：
                 CREATE TABLE [IF NOT EXISTS] 表名(
