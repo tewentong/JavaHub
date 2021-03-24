@@ -44,12 +44,28 @@
                         列名 列类型,
                         列名 列类型,
                         ...
+                        列名 列类型
+                    );
+
+                    alter table 表名
+                    add (
+                        列名 列类型，
+                        列名 列类型，
+                        ...
+                        列名 列类型
                     );
                 修改之修改列类型（如果被修改的列已存在数据，那么新的类型可能会影响到已存在数据）:
                     ALTER TABLE 表名 MODIFY 列名 列类型;
+
+                    alter table 表名
+                    modify 列名 列新的类型;
                 修改之修改列名：ALTER TABLE 表名 CHANGE 原列名 新列名 列类型;
                 修改之删除列：ALTER TABLE 表名 DROP 列名;
+                    alter table 表名
+                    drop 列名;
                 修改表名称：ALTER TABLE 原表名 RENAME TO 新表名;
+                    alter table 表名
+                    rename to 新表名;
 */
 public class DDL {
 
