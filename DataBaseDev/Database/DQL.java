@@ -131,14 +131,21 @@
         SELECT * FROM emp LIMIT 4, 3;
             其中4表示从第5行开始，其中3表示一共查询3行，即第5、6、7行记录
 
+        select * from emp limit 0, 5;   //从第0行开始，需要5行记录
 
-
+        分页查询：
+            1.一页的记录数：10行
+            2.查询第三页
+            select * from emp limit 20, 10;   //0~9第一页， 10～19第二页， 20～29第三页
+                                                (当前页-1) * 每页记录数
+                                                (3-1)     *    10      =    20
     如果一条语句中要用到所有的关键字，其顺序是：
         select
         from
         where 
         group by
         having
+        order by
 */
 public class DQL {
 
