@@ -116,8 +116,7 @@
         select job, count(*), max(sal) from emp group by job;   //当前组的最大工资
         select gender, count(*) from stu group by gender;   //用性别分组，打印出每组人数
         
-        组条件
-        以部门分组，查询每组记录数，条件为记录数大于3
+        组条件: 以部门分组，查询每组记录数，条件为记录数大于3
         SELECT deptno, COUNT(*) FROM emp GROUP BY deptno HAVING COUNT(*) > 3;
 
         select deptno, count(*) from emp where sal>15000 group by deptno;   //将薪水大于15000的人按照部门分组
