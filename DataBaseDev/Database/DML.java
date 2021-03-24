@@ -35,7 +35,14 @@
             条件必须是一个boolean类型的值或表达式：
                 UPDATE t_person SET gender='男', age=age+1 WHERE sid='1';
             运算符：
-                =、！=、<>、>、<、>=、<=、BETWEEN...AND、IN(...)、IS NULL、OT、AND
+                =、！=、<>、>、<、>=、<=、BETWEEN...AND、IN(...)、IS NULL、NOT、OR、AND
+                
+                update stu set age=age+1 where age>=20 and age<=40;
+                update stu set age=age+1 where age between 20 and 40;
+                update stu set age=36 where name in('ZhangSan', 'Lisi');
+                update stu set age=38 where age is null;    //age=null本身就是false，不用看某一列的值
+                update stu set age=48 where not age between 20 and 40;
+                update stu set age=100 where age is not null;
     3.删除数据
         DELETE FROM 表名 [WHERE 条件];
         TRUNCATE TABLE 表名: TRUNCATE是DDL语句, 它是先删除drop该表， 在create该表，而且无法回滚！
