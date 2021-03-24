@@ -80,7 +80,66 @@
         3.使用多列作为排序条件
             SELECT * FROM WHERE emp ORDER BY sal ASC, com DESC;
                 使用sal升序，如果sal相同时，使用com的降序排
+            select * from emp order by sal asc, com desc, empno asc;
     三、聚合函数
+        聚合函数用来做某列的纵向运算
+        1.COUNT 计算有效行数
+            SELECT COUNT(*) FROM emp;
+                计算emp表中所有列都不为NULL的记录的行数
+                即公司总共有多少人
+                select count(1) from emp;   //count(2)、count(200)都可以，与count(*)没有区别
+                SELECT COUNT(com) FROM emp;
+                计算emp表中com列不为NULL的记录的列数
+        2.MAX
+            SELECT MAX(sal) FROM emp;
+                查询最高工资
+        3.MIN
+            SELECT MIN(sal) FROM emp;
+                查询最低工资
+        4.SUM
+            SELECT SUM(sal) FROM emp;
+                查询工资和
+        5.AVG
+            SELECT AVG(sal) FROM emp;
+                查询平均工资
+        
+        select count(*) 人数, sum(sal) 总和, max(sal) 最高, min(sal) 最低， avg(sal) 平均 from emp;
+    四、分组查询
+        分组查询是把记录使用某一列进行分组，然后查询组信息
+        例如：查看所有部门的记录数
+        SELECT deptno, COUNT(*) FROM emp GROUP BY deptno;
+            使用deptno分组，查询部门编号和每个部门的记录数
+        SELECT job, MAX(sal) FROM emp GROUP BY job;
+            使用job分组，查询每种工作的最高工资
+
+        select job, count(*) from emp group by job;
+        select job, count(*), max(sal) from emp group by job;   //当前组的最大工资
+        select gender, count(*) from stu group by gender;   //用性别分组，打印出每组人数
+        
+        组条件
+        以部门分组，查询每组记录数，条件为记录数大于3
+        SELECT deptno, COUNT(*) FROM emp GROUP BY deptno HAVING COUNT(*) > 3;
+
+        select deptno, count(*) from emp where sal>15000 group by deptno;   //将薪水大于15000的人按照部门分组
+        //先筛选出薪水大于15000的人（分组前的条件  where）
+
+        select deptno, count(*) from emp where sal>15000 group by deptno having count(*)>=2;
+        //先筛选出薪水大于15000的人（分组前的条件  where）
+        //后筛选出人数超过两人的小组（分组后的条件  having） 用聚合函数做条件
+    五、limit子句(方言)
+        LIMIT用来限定查询结果的起始行，以及总行数
+        例如：查询起始行为第5行，一共查询3行记录
+        SELECT * FROM emp LIMIT 4, 3;
+            其中4表示从第5行开始，其中3表示一共查询3行，即第5、6、7行记录
+
+
+
+    如果一条语句中要用到所有的关键字，其顺序是：
+        select
+        from
+        where 
+        group by
+        having
 */
 public class DQL {
 
