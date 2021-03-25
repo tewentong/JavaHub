@@ -36,7 +36,5 @@ import java.time.chrono.MinguoChronology;
 
 */
 public class MySQLEncoding {
-    public static void main(String[] args) {
 
-    }
 }
