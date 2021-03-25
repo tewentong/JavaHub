@@ -59,9 +59,18 @@
             右外：SELECT * FROM 表1 别名1 RIGHT OUTER JOIN 表2 别名2 ON 别名1.xx=别名2.xx
                 右表记录无论是否满足条件都会查询出来，而左表只有满足条件才能出来
                 右表不满足条件的记录，其左表部分都为NULL
+                    SELECT e.ename, e.sal, d.dname
+                    FROM emp e RIGHT OUTER JOIN dept d  //dept为主
+                    ON e.deptno=d.deptno;
             右外自然：SELECT * FROM 表1 别名1 NATURAL RIGHT OUTER JOIN 表2 别名2 ON 别名1.xx=别名2.xx
             全链接：可以使用UNION来完成全链接
-    
+                    SELECT e.ename, e.sal, d.dname
+                    FROM emp e LEFT OUTER JOIN dept d
+                    ON e.deptno=d.deptno
+                    UNION
+                    SELECT e.ename, e.sal, d.dname
+                    FROM emp e RIGHT OUTER JOIN dept d
+                    ON e.deptno=d.deptno;
     子查询：查询中有查询（查看select关键字的个数）
         1.出现的位置：
             where后作为条件存在
