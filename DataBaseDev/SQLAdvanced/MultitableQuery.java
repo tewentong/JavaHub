@@ -44,9 +44,17 @@
                 FROM emp e NATURAL JOIN dept d; //自动匹配完全相同的列，但是可读性降低
             内连接查询出的所有记录都满足条件
         3.外连接
+            外连接有一主一次，左外即为左表为主
             左外：SELECT * FROM 表1 别名1 LEFT OUTER JOIN 表2 别名2 ON 别名1.xx=别名2.xx
                 左外表记录无论是否满足条件都会查询出来，而右表只有满足条件才能出来
                 左表中不满足条件的记录，右表部分都为NULL
+                    SELECT e.ename, e.sal, d.dname
+                    FROM emp e LEFT OUTER JOIN dept d   //emp为主，那么主表中的记录无论满足不满足条件，都打印出来
+                    ON e.deptno=d.deptno;
+
+                    SELECT e.ename, e.sal, IFNULL(d.dname, '无部门') AS dname
+                    FROM emp e LEFT OUTER JOIN dept d
+                    ON e.deptno=d.deptno;
             左外自然：SELECT * FROM 表1 别名1 NATURAL LEFT OUTER JOIN 表2 别名2 ON 别名1.xx=别名2.xx
             右外：SELECT * FROM 表1 别名1 RIGHT OUTER JOIN 表2 别名2 ON 别名1.xx=别名2.xx
                 右表记录无论是否满足条件都会查询出来，而左表只有满足条件才能出来
