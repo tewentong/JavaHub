@@ -23,8 +23,25 @@
             自然连接（属于一种简化方式）
         2.内连接
             方言：SELECT * FROM 表1 别名1， 表2 别名2 WHERE 别名1.xx=别名2.xx
+                SELECT *
+                FROM emp, dept;
+                //笛卡尔积--无用数据过多
+                //{a, b, c} {1, 2}
+                //{a1, a2, b1, b2, c1, c2}
+                SELECT *
+                FROM emp, dept
+                WHERE emp.deptno=dept.deptno;
+
+                select emp.ename, emp.sal, dept.dname
+                from emp, dept
+                where emp.deptno=dept.deptno;
             标准：SELECT * FROM 表1 别名1 INNER JOIN 表2 别名2 ON 别名1.xx=别名2.xx
+                SELECT e.ename, e.sal, d.dname
+                FROM emp e INNER JOIN dept d
+                ON e.deptno=d.deptno;
             自然：SELECT * FROM 表1 别名1 NATURAL JOIN 表2 别名2
+                SELECT e.ename, e.sal, d.dname
+                FROM emp e NATURAL JOIN dept d; //自动匹配完全相同的列，但是可读性降低
             内连接查询出的所有记录都满足条件
         3.外连接
             左外：SELECT * FROM 表1 别名1 LEFT OUTER JOIN 表2 别名2 ON 别名1.xx=别名2.xx
