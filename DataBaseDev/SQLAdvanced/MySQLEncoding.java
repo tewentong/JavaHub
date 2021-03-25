@@ -1,3 +1,5 @@
+import java.time.chrono.MinguoChronology;
+
 /*
     编码
     1.查看MySQL数据库编码
@@ -29,7 +31,12 @@
         我们在安装MySQL时已经指定了默认编码为UTF8，所以我们在创建数据库，创建表时，都无需再次指定编码
         为了一劳永逸，可以在my.init中设置
             设置default-set-server=utf8即可
+
+    character_set_client=utf8, 无论客户端发送的是什么编码的数据，mysql都当成是utf8的数据
+
 */
 public class MySQLEncoding {
+    public static void main(String[] args) {
 
+    }
 }
