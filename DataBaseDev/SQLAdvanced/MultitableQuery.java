@@ -64,6 +64,7 @@
                     ON e.deptno=d.deptno;
             右外自然：SELECT * FROM 表1 别名1 NATURAL RIGHT OUTER JOIN 表2 别名2 ON 别名1.xx=别名2.xx
             全链接：可以使用UNION来完成全链接
+
                     SELECT e.ename, e.sal, d.dname
                     FROM emp e LEFT OUTER JOIN dept d
                     ON e.deptno=d.deptno
@@ -75,11 +76,26 @@
         1.出现的位置：
             where后作为条件存在
             from后作为表存在（多行多列）
+            例程：where后作为条件
+                查询本公司工资最高的员工的详细信息：
+                SELECT * FROM emp WHERE sal=(SELECT MAX(sal) FROM emp);
+            例程：from后作为表
+                SELECT e.empno, e.ename
+                FROM (SELECT * FROM EMP WHERE deptno=30) e;
         2.条件
             单行单列：SELECT * FROM 表1 别名1 WHERE 列1 [=、>、<、>=、<=、！=]  (SELECT 列 FROM 表2 别名2 WHERE 条件)
             多行单列：SELECT * FROM 表1 别名1 WHERE 列1 [IN, ALL, ANY] (SELECT 列 FROM 表2 别名2 WHERE 条件)
             单行多列：SELECT * FROM 表1 别名1 WHERE (列1、列2) IN (SELECT 列1, 列2 FROM 表2 别名2 WHERE 条件)
             多行多列：SELECT * FROM 表1 别名1, (SELECT ...) 别名2 WHERE 条件
+
+            例程：打印工资大于平均工资的所有列
+                SELECT * FROM EMP WHERE sal > (SELECT AVG(sal) FROM EMP);
+            例程：打印工资大于30部门所有员工工资的人的信息(多行单列)
+                SELECT * FROM EMP WHERE sal > ALL (SELECT sal FROM EMP WHERE deptno=30);
+            例程：打印工资大于30部门中任意一人工资的人的信息(多行单列)
+                SELECT * FROM EMP WHERE sal > ANY (SELECT sal FROM EMP WHERE deptno=30);
+            例程：查询工作、部门、工资同殷天正相同的员工的信息(单行多列)---用的很少
+                SELECT * FROM EMP WHERE (job, deptno, sal) IN (SELECT job, deptno, sal FROM EMP WHERE ename='殷天正');
 */
 public class MultitableQuery {
 
