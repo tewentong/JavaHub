@@ -4,7 +4,7 @@
         表：EMP e, EMP boss 
         条件：员工的mgr=上级的empno
  
-        答案：自身连接
+        答案：自身连接(自身的多表连接)
             SELECT * 
             FROM EMP e, EMP boss 
             WHERE e.mgr=boss.empno;
