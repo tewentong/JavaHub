@@ -64,7 +64,8 @@
                     ON e.deptno=d.deptno;
             右外自然：SELECT * FROM 表1 别名1 NATURAL RIGHT OUTER JOIN 表2 别名2 ON 别名1.xx=别名2.xx
             全链接：可以使用UNION来完成全链接
-
+                    左外连接 UNION 右外连接
+                    
                     SELECT e.ename, e.sal, d.dname
                     FROM emp e LEFT OUTER JOIN dept d
                     ON e.deptno=d.deptno
