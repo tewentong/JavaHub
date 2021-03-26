@@ -4,7 +4,7 @@
         表：EMP e, EMP boss 
         条件：员工的mgr=上级的empno
  
-        答案： 
+        答案：自身连接
             SELECT * 
             FROM EMP e, EMP boss 
             WHERE e.mgr=boss.empno;
@@ -32,6 +32,10 @@
                 | MILLER | CLARK |
                 +--------+-------+
 
+        不输出NULL:
+        SELECT e.ename, IFNULL(boss.ename, 'BOSS')
+        FROM EMP e LEFT OUTER JOIN EMP boss
+        ON e.mgr=boss.empno;
     
 */
 public class train2 {
