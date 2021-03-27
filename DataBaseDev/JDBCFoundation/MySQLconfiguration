@@ -10,11 +10,11 @@ ubuntu系统下命令行安装万以后，我们需要修改
     socket  = /var/run/mysqld/mysqld.sock
     port            = 3306
     datadir = /var/lib/mysql
-    #关键是这一句，可以在非su权限下启动mysql,这样后续可以在VS code中使用JDBC连接MySQL数据库
-    skip-grant-tables
+    # bind-address		= 127.0.0.1
+    # mysqlx-bind-address	= 127.0.0.1
+修改结束后：
+    service mysql restart;
 
-
-    mysqlx-bind-address     = 127.0.0.1
 
 
 
@@ -23,8 +23,28 @@ ubuntu系统下命令行安装万以后，我们需要修改
     1.查看 mysql 初始的密码策略
         SHOW VARIABLES LIKE 'validate_password%';
     2.设置密码验证强度等级
-        set global validate_password_policy=MEDIUM;
+        set global validate_password.policy=MEDIUM;
     3.设置密码长度
-        set global validate_password_length=4;
+        set global validate_password.length=4;
     4.修改密码
         ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
+
+
+
+VS code连接数据库之前，先在Extensions里面搜索mysql，完了install:
+    MySQL
+    MySQL Syntax
+
+在非root权限下也可以访问数据库：
+    mysql> USE mysql;
+    mysql> CREATE USER 'kwj-at-lzu'@'localhost' IDENTIFIED BY 'YOUR_PASSWD';
+    mysql> GRANT ALL PRIVILEGES ON *.* TO 'kwj-at-lzu'@'localhost';
+    mysql> UPDATE user SET plugin='auth_socket' WHERE User='kwj-at-lzu';
+    mysql> FLUSH PRIVILEGES;
+    mysql> exit;
+
+    sudo service mysql restart
+    然后在root权限下执行命令：
+        grant system_user on *.* to 'root';
+    最后执行：
+        alter user 'kwj-at-lzu'@'localhost' identified with mysql_native_password by 'code';
