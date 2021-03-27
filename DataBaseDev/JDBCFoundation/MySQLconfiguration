@@ -1,0 +1,30 @@
+ubuntu系统下命令行安装万以后，我们需要修改
+    sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
+在其中修改如下：
+    [mysqld]
+    #
+    # * Basic Settings
+    #
+    user            = mysql
+    pid-file        = /var/run/mysqld/mysqld.pid
+    socket  = /var/run/mysqld/mysqld.sock
+    port            = 3306
+    datadir = /var/lib/mysql
+    #关键是这一句，可以在非su权限下启动mysql,这样后续可以在VS code中使用JDBC连接MySQL数据库
+    skip-grant-tables
+
+
+    mysqlx-bind-address     = 127.0.0.1
+
+
+
+
+关于密码：
+    1.查看 mysql 初始的密码策略
+        SHOW VARIABLES LIKE 'validate_password%';
+    2.设置密码验证强度等级
+        set global validate_password_policy=MEDIUM;
+    3.设置密码长度
+        set global validate_password_length=4;
+    4.修改密码
+        ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
