@@ -3,7 +3,7 @@
         1.数据库
             查看所有数据库：SHOW DATABASES
             切换（选择要操作的）数据库：USE 数据库名
-            创建数据库：CREATE DATABASE [IF NOT EXIST] myda1 [CHARSET=utf8]
+            创建数据库：CREATE DATABASE [IF NOT EXISTS] mydb1 [CHARSET=utf8]
             删除数据库：DROP DATABASE [IF EXISTS] mydb1
             修改数据库编码：ALTER DATABASE mydb1 CHARACTER SET utf8
         2.数据类型（列类型）
