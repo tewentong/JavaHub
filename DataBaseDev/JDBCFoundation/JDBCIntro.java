@@ -1,5 +1,6 @@
 
-/*  导jar包：驱动
+/*  
+    导jar包：驱动
     加载驱动类：Class.forName("类名");
     给出url、user、password，其中url背下来！
     使用DriverManager类来得到Connection对象！
@@ -15,7 +16,15 @@
                 由SUN提供一套访问数据库的规范（就是一套接口），并提供连接数据库的协议标准
                 然后各个数据库厂商会遵循SUN的规范提供一套访问自己公司的数据库服务器的API
             SUN提供的规范命名为JDBC，而各个厂商提供的，遵循了JDBC规范的，可以访问自己数据库的API被称之为驱动
-    
+
+            注册驱动部分代码：
+                static {
+                    try {
+                        java.sql.DriverManager.registerDriver(new Driver());
+                    } catch (SQLException E) {
+                        throw new RuntimeException("Can't register driver");
+                    }
+                }
 */
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,7 +37,8 @@ public class JDBCIntro {
      *                                检查是否开启了MySQL服务器
      */
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver"); // 加载驱动类
+        // 四个配置参数
+        Class.forName("com.mysql.cj.jdbc.Driver"); // 加载驱动类(注册驱动)--执行驱动类的静态代码块
         String url = "jdbc:mysql://localhost:3306/mydb1"; // 连接服务器需要：1.IP地址 2.端口号
         String username = "kwj-at-lzu";
         String password = "code";
