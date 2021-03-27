@@ -6,7 +6,7 @@
     "java.configuration.checkProjectSettingsExclusions": false,
     "java.requirements.JDK11Warning": false,
     "editor.fontSiz": 18,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "notebook.kernelProviderAssociations": [],
     "java.test.config": {},
     "java.configuration.runtimes": [
@@ -15,5 +15,18 @@
             "path": "/usr/local/jdk1.8",
             "default":true,
         }
-    ]
+    ],
+    "git.suggestSmartCommit": false,
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    },
+    "oracledevtools.bookmarkFileFolder": "/home/kwj-at-lzu/Oracle/oracle.oracledevtools",
+    "oracledevtools.connectionConfiguration.configFilesFolder": "/home/kwj-at-lzu/Oracle/network/admin",
+    "oracledevtools.connectionConfiguration.walletFileFolder": "/home/kwj-at-lzu/Oracle/network/admin",
+    "http.proxyAuthorization": null,
+    "java.project.referencedLibraries": {
+        "include": [
+            "/home/kwj-at-lzu/VSCode/jar/mysql-connector-java-8.0.23.jar"
+        ]
+    },
 }
