@@ -34,10 +34,18 @@ ubuntu系统下命令行安装万以后，我们需要修改
 VS code连接数据库之前，先在Extensions里面搜索mysql，完了install:
     MySQL
     MySQL Syntax
-
-在非root权限下也可以访问数据库：
+使用VS code连接MySQL需要导入jar包，jar包可以在官网下载
+    我们需要在settings.json文件中，找到jar包目录：
+    在次目录中依次追加jar包
+        "java.project.referencedLibraries": {
+        "include": [
+            "/home/kwj-at-lzu/VSCode/jar/mysql-connector-java-8.0.23.jar"
+            ]
+        },
+        
+修改权限，使得可以在非root权限下访问数据库：
     mysql> USE mysql;
-    mysql> CREATE USER 'kwj-at-lzu'@'localhost' IDENTIFIED BY 'YOUR_PASSWD';
+    mysql> CREATE USER 'kwj-at-lzu'@'localhost' IDENTIFIED BY 'password';
     mysql> GRANT ALL PRIVILEGES ON *.* TO 'kwj-at-lzu'@'localhost';
     mysql> UPDATE user SET plugin='auth_socket' WHERE User='kwj-at-lzu';
     mysql> FLUSH PRIVILEGES;
@@ -47,4 +55,4 @@ VS code连接数据库之前，先在Extensions里面搜索mysql，完了install
     然后在root权限下执行命令：
         grant system_user on *.* to 'root';
     最后执行：
-        alter user 'kwj-at-lzu'@'localhost' identified with mysql_native_password by 'code';
+        alter user 'kwj-at-lzu'@'localhost' identified with mysql_native_password by 'password';
