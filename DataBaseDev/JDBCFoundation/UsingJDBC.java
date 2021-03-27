@@ -82,9 +82,13 @@ public class UsingJDBC {
             int empno = rs.getInt(1); // 通过列编号来获取该列的值
             String ename = rs.getString("ENAME"); // 通过列名称来获取来获取该列的值
             Double sal = rs.getDouble("SAL");
-
             System.out.println("EMPNO: " + empno + ", ENAME: " + ename + ", SAL: " + sal);
         }
+
+        // 四、关闭资源（先得到的对象后关闭）
+        rs.close();
+        stmt.close();
+        con.close(); // 此对象必须要关闭，如果一直不关闭，多次执行以后会导致资源耗尽
     }
 
     public static void main(String[] args) throws Exception {
