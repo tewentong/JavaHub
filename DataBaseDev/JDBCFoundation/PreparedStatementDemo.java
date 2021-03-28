@@ -16,6 +16,18 @@ import java.sql.ResultSet;
                 调用Connection的PreparedStatement prepareStatement(String sql模板);
                 调用pstmt的setXxx()系列方法为sql模板中的？赋值
                 调用pstmt的executeUpdate()或executeQuery()方法，但两个方法都没有参数
+
+        PreparedStatement预处理原理（预编译）
+            服务器的工作：
+                校验SQL语句的语法
+                编译：最后把SQL语句变为一个与函数相似的东西
+                执行：调用函数
+            Preparedstatement:
+                前提：连接的数据库必须支持预处理（几乎没有不支持的）
+                每个pstmt都与一个sql模板绑定在一定，先把模板给数据库，
+                    数据先进行校验，再进行编译
+                    执行时只是把参数传递过去而已
+                若二次执行时，就不用再次校验语法，也不用再次编译，可以直接执行
 */
 class User032802 {
     public boolean login(String username, String password) throws Exception {
@@ -40,6 +52,11 @@ class User032802 {
 
         // 进行查询
         ResultSet rs = pstmt.executeQuery(); // 调用查询方法，向数据库发送查询语句
+
+        // 程序已经校验并编译过sql模板了
+        // 现在要执行 用户liSi 相关的操作时，不用再校验语法，编译模板，可以直接执行下面两条命令
+        // pstmt.setString(1, "liSi");
+        // pstmt.setString(2, "123");
         return rs.next();
     }
 }
