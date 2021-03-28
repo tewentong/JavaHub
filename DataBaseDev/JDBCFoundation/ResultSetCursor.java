@@ -38,7 +38,7 @@
                     如果使用execute()方法执行的是查询语句：
                         那么还要调用ResultSet getResultSet()来获取select语句的查询结果
                 
-        ResultSet之滚动结果集（了解）
+        ResultSet之滚动结果集（了解） MySQL数据库默认就是滚动的，可以调用如下方法
             ResultSet表示结果集，它是一个二维的表格！ 
             ResultSet内部维护一个行光标（游标），ResultSet提供了一系列方法来移动游标：
                 下一行：默认只能使用它，其他的方法存在，但不能使用！默认的结果集不可滚动！
@@ -61,19 +61,38 @@
                 int getRow():返回当前光标所有行
 
                 上面方法分为两类，一类用来判断游标位置，另一类用来移动游标
-                    如果结果集是不可滚动的，那么只能使用next()方法来移动游标，而其他方法统统不能使用
-                结果集是否支持滚动，要从Connection类的createStatement()方法说起，
-                    也就是说创建的Statement决定——使用Statement创建的ResultSet是否支持滚动
+
+            结果集特性：当使用Connection的createStatement时，已经确定了Statement生成的结果集是什么特性
+                1.是否可滚动    不可滚动即只能调用next()方法
+                2.是否敏感
+                3.是否可更新
                 
+                con.createStatement();生成的结果集:不滚动、不敏感、不可更新
+                    如果结果集是不可滚动的，那么只能使用next()方法来移动游标，而其他方法统统不能使用
+                    结果集是否支持滚动，要从Connection类的createStatement()方法说起，
+                        也就是说创建的Statement决定——使用Statement创建的ResultSet是否支持滚动
+
                 Statement createStatement(int resultSetType, int resultSetConcurrency); //了解
                     resultSetType的可选值：
                         ResultSet.TYPE_FORWARD_ONLY:不可滚动结果集
                         ResultSet.TYPR_SCROLL_INSENSITIVE:滚动结果集，但结果集数据不会再跟随数据库而变化
                         ResultSet.TYPE_SCROLL_SENSITIVE:滚动结果集，但结果集数据不会再跟随数据库而变化      //没有数据库驱动支持
 
-                可以看出，如果想使用滚动结果集，我们应该选择TYPE_SCROLL_INSENSITIVE!
+                        可以看出，如果想使用滚动结果集，我们应该选择TYPE_SCROLL_INSENSITIVE!
+                            其实很少有数据库驱动会支持TYPE_SCROLL_SENSITIVE的特性！
+                            通常我们也不需要查询到的结果集再受到数据库变化的影响
+                
+                    resultSetConcurrency的可选值：
+                        CONCUR_READ_ONLY:结果集是只读的，不能通过修改结果集而反向印象数据库
+                        CONCUR_UPDATABLE:结果集是可更新的，对结果集的更新可以反向影响数据库
+                            通常更新结果集这一“高级特性”我们也不需要
+                    获取滚动结果集的代码如下：
+                        Connection con = ... 
+                        Statement stmt = con.createStatement(Result.TYPE_SCROLL_INSENSITIVE, CONCUR_READ_ONLY);
+                        String sql = ...//查询语句
+                        ResultSet rs = stmt.executeQuery(sql);  //这个结果集是滚动的
 
-            获取结果集元数据
+            获取结果集元数据（元数据相关）
                 得到元数据：rs.getMetaData(), 返回值为ResultSetMetaData
                 获取结果集列数：int getColumnCount()
                 获取指定列的列名：String getColumnName(int colIndex)
@@ -88,6 +107,24 @@
                     }
                     System.out.println();
                 }
+
+        ResultSet之获取列数据
+            可以通过next()方法使ResultSet的游标向下移动，当游标移动到你需要的行时，就需要来获取该行的数据了
+            ResultSet提供了一系列的获取列数据的方法：
+                String getString(int columnIndex):获取指定列的String类型数据
+                int getString(int columnIndex):获取指定列的int类型数据
+                double getDouble(int columnIndex):获取指定列的double类型数据
+                boolean getBoolean(int columnIndex):获取指定列的boolean类型数据
+                Object getObject(int columnIndex):获取指定列的Object类型数据
+                上面的方法中，参数columnIndex表示列的索引，列索引从1开始，而不是0，这一点与数组不同
+                    如果你清楚当前列的数据类型，那么就可以使用getInt()之类的方法来获取，
+                    如果你不清楚列的类型，那么你应该使用getObject()方法来获取
+            ResuleSet还提供了一套通过列名称来获取列数据的方法:
+                String getString(String columnName):获取名称为columnName列的String数据
+                int getInt(String columnName):获取名称为columnName列的int数据
+                double getDouble(String columnName):获取名称为columnName的列的double数据
+                boolean getBoolean(String columnName):获取名称为columnName的列的boolean数据
+                Object getObject(String columnName):获取名称为columnName的Object数据
 */
 public class ResultSetCursor {
 
