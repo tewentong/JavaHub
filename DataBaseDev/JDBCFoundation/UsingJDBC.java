@@ -78,11 +78,16 @@ public class UsingJDBC {
 
         // 三、解析ResultSet
         // 1.把行光标移动到第一行，可以调用next()方法完成
-        while (rs.next()) { // 把光标向下移动一行，并判断下一行是否存在
-            int empno = rs.getInt(1); // 通过列编号来获取该列的值
-            String ename = rs.getString("ENAME"); // 通过列名称来获取来获取该列的值
-            Double sal = rs.getDouble("SAL");
-            System.out.println("EMPNO: " + empno + ", ENAME: " + ename + ", SAL: " + sal);
+
+        int count = rs.getMetaData().getColumnCount(); // 利用元数据获取结果集列数
+        while (rs.next()) { // 遍历行
+            for (int i = 1; i <= count; i++) { // 遍历列
+                System.out.print(rs.getString(i)); // getString()在类型上是通用的
+                if (i < count) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.println();
         }
 
         // 四、关闭资源（先得到的对象后关闭）
