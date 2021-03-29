@@ -13,6 +13,10 @@
             java.util.Date -- java.sql.Date、Time、Timestamp
                 把Util的Date转换成毫秒值
                 使用毫秒值创建my.sql.Date、Time、Timestamp
+
+                java.util.Date date = new java.util.Date();
+                long l = date.getTime();
+                java.sql.Date sqlDate = new java.sql.Date(l);
             java.sql.Date、Time、Timestamp -- java.util.Date
                 这一步不需要处理了，因为java.sql.Date是java.util.Date的子类
                 java.util.Date date = new java.sql.Date();
