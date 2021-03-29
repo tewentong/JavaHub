@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -96,7 +97,14 @@ public class UsingJDBC {
         con.close(); // 此对象必须要关闭，如果一直不关闭，多次执行以后会导致资源耗尽
     }
 
+    // 利用自己的JDBCUtils完成连接的测试
+    public void JDBCUtilsTest() throws SQLException {
+        Connection con = JDBCUtils.getConnection();
+        System.out.println(con);
+    }
+
     public static void main(String[] args) throws Exception {
-        new UsingJDBC().executeQueryFunc();
+        // new UsingJDBC().executeQueryFunc();
+        new UsingJDBC().JDBCUtilsTest();
     }
 }
