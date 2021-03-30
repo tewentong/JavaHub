@@ -22,6 +22,8 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
         连接池返回的Connection对象，它的close()方法与众不同
             调用它的close()不是关闭，而是把连接归还给池
+
+        通常一个项目创建一个连接池
         1.数据库连接池的概念
             任何实现了javax.sql中DataSource接口的类都是数据库连接池
 
@@ -56,6 +58,7 @@ public class Dbcp {
 
         // 连接池内部使用四大参数创建了连接对象，即MySQL驱动提供的Connetion
         // 连接池使用MySQL的连接对象进行了装饰，只对close()方法进行了增强
+        // 调用dbcp的方法都是在调用mysql的con，值欧close()才是dbcp自己的方法
         // 装饰之后的Connetion的close()方法，用来把当前连接归还给连接池
         con.close(); // 把连接归还给池
     }
