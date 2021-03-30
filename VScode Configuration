@@ -22,7 +22,10 @@
     },
     "java.project.referencedLibraries": {
         "include": [
-            "/home/kwj-at-lzu/VSCode/jar/mysql-connector-java-8.0.23.jar"
+            "/home/kwj-at-lzu/VSCode/jar/mysql-connector-java-8.0.23.jar",
+            "/home/kwj-at-lzu/VSCode/jar/commons-dbcp2-2.8.0.jar",
+            "/home/kwj-at-lzu/VSCode/jar/commons-pool2-2.9.0.jar",
+            "/home/kwj-at-lzu/VSCode/jar/commons-logging-1.2.jar",
         ]
     },
 }
