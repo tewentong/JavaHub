@@ -28,6 +28,7 @@
             "/home/kwj-at-lzu/VSCode/jar/commons-logging-1.2.jar",
             "/home/kwj-at-lzu/VSCode/jar/c3p0-0.9.5.2.jar",
             "/home/kwj-at-lzu/VSCode/jar/mchange-commons-java-0.2.15.jar",
+            "/home/kwj-at-lzu/VSCode/jar/commons-dbutils-1.6.jar",
         ]
     },
 }
