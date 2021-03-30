@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding"UTF-8">
+<c3p0-config>
+    <default-config>
+        <!--连接参数配置-->
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/mydb3</property>
+        <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
+        <property name="user">kwj-at-lzu</property>
+        <property name="password">code</property>
+    </default-config>
+</c3p0-config>
