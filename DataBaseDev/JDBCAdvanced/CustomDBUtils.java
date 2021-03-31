@@ -3,68 +3,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.jws.soap.InitParam;
 import javax.sql.DataSource;
 
 /*
     commons-dbutils 简化jdbc的代码
 
 */
-class Stu {
-    private int sid;
-    private String sname;
-    private int age;
-    private String gender;
-
-    public int getSid() {
-        return sid;
-    }
-
-    public void setSid(int sid) {
-        this.sid = sid;
-    }
-
-    public String getSname() {
-        return sname;
-    }
-
-    public void setSname(String sname) {
-        this.sname = sname;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    @Override
-    public String toString() {
-        return "Stu [age=" + age + ", gender=" + gender + ", sid=" + sid + ", sname=" + sname + "]";
-    }
-
-    public Stu() {
-    }
-
-    public Stu(int sid, String sname, int age, String gender) {
-        this.sid = sid;
-        this.sname = sname;
-        this.age = age;
-        this.gender = gender;
-    }
-
-}
-
 class StuOperation {
     public void addStu(Stu stu) {
         Connection con = null;
@@ -129,6 +73,7 @@ class StuOperation {
         try {
             con = JDBCUtils.getConnection();
             String sql = "select * from t_stu WHERE sid = ?";
+            pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, sid);
 
             rs = pstmt.executeQuery();
@@ -174,7 +119,7 @@ class QR<T> {
                     if (pstmt != null)
                         pstmt.close();
                     if (con != null)
-                        pstmt.close();
+                        con.close();
                 } catch (SQLException ee) {
                     ee.printStackTrace();
                 }
@@ -230,10 +175,10 @@ interface RsHandler<T> {
 
 public class CustomDBUtils {
     public static void main(String[] args) {
-        Stu s = new Stu(1001, "zhangSan", 99, "male");
+        Stu s = new Stu(1005, "wangWu", 29, "male");
         addStu(s);
 
-        Stu slook = load(1001);
+        Stu slook = load(1005);
         System.out.println(slook);
     }
 
@@ -263,7 +208,6 @@ public class CustomDBUtils {
                 stu.setGender(rs.getString("gender"));
                 return stu;
             }
-
         };
         return (Stu) qr.query(sql, rh, params);
     }
