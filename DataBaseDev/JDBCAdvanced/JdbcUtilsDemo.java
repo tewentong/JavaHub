@@ -175,7 +175,7 @@ class AccountDao0330 {
 public class JdbcUtilsDemo {
     private AccountDao0330 dao = new AccountDao0330();
 
-    public void serviceMethod() {
+    public void serviceMethod() throws Exception {
         try {
             JdbcUtils.beginTransaction();
             dao.update("zs", -20000);
@@ -187,5 +187,9 @@ public class JdbcUtilsDemo {
             } catch (Exception ee) {
             }
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        new JdbcUtilsDemo().serviceMethod();
     }
 }

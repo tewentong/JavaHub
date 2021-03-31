@@ -7,8 +7,11 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
         C3P0简介：C3P0也是开源免费的连接池
         C3P0的使用：
             C3P0中池类是：CombpPooledDataSource
-
+        C3P0也可以指定配置文件，且配置文件可以是properties，也可以是xml的
+            但是C3P0的配置文件名必须为c309-config.xml，且必须放在类路径下
+            
 */
+
 public class C3p0 {
     public void c3p0Connection() throws Exception {
         // 创建连接池对象

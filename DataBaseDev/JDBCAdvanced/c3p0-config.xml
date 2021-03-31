@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding"UTF-8">
+<?xml version="1.0" encoding="UTF-8"?>
 <c3p0-config>
     <default-config>
         <!--连接参数配置-->
@@ -6,5 +6,11 @@
         <property name="driverClass">com.mysql.cj.jdbc.Driver</property>
         <property name="user">kwj-at-lzu</property>
         <property name="password">code</property>
+
+        <property name="initialPoolSize">10</property>
+        <property name="maxIdleTime">30</property>
+        <property name="maxPoolSize">100</property>
+        <property name="minPoolSize">10</property>
+
     </default-config>
 </c3p0-config>
