@@ -120,7 +120,7 @@ class JdbcUtils {
     // 开启事务
     // 1.获取一个Connetion，设置它的setAutoCommit(false)
     // 2.还要保证dao中使用的连接是我们刚刚创建的
-    // ----------------------------------------------
+    // --------------------------------------------------------------------
     // 1.创建一个Connetion，设置为手动提交
     // 2.把这个Connetion给Dao用
     // 3.还要让commitTransaction或rollbackTransaction可以获取到
