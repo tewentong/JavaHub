@@ -16,8 +16,11 @@ public class DbUtilsDemo {
     }
 
     public static void myQuery() throws SQLException {
+        // 创建QueryRunner，需要提供数据库连接池对象
         QueryRunner qr = new QueryRunner(JdbcUtils.getDataSource());
+        // 提供sql模板
         String sql = "select * from t_stu WHERE sid=?";
+        // 给出参数
         Object[] params = { 1001 };
 
         // 执行query()方法，需要给出结果集处理器，即ResultHandler的实现类
