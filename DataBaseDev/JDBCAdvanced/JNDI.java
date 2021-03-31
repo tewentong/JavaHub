@@ -62,6 +62,6 @@ class Servlet0331 extends HttpServlet {
 
 public class JNDI {
     public static void main(String[] args) {
-
+        new Servlet0331().doGet(request, response);
     }
 }
