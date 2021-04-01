@@ -149,7 +149,7 @@ class JdbcUtils {
         // 把con设置为null，表示事务已经结束了
         // 下次再调用getConnection()，返回的就不是这个con了
         // con = null;
-        tl.remove(); // 从tl中移除线程
+        tl.remove(); // 从tl中移除连接
     }
 
     // 回滚
@@ -164,7 +164,7 @@ class JdbcUtils {
         // 把con设置为null，表示事务已经结束了
         // 下次再调用getConnection()，返回的就不是这个con了
         // con = null;
-        tl.remove();
+        tl.remove(); // 从tl中移除连接
     }
 
     // 释放连接
