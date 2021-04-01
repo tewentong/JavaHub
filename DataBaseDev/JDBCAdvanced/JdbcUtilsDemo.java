@@ -102,10 +102,11 @@ class JdbcUtils {
     private static ComboPooledDataSource dataSource = new ComboPooledDataSource();
 
     // 它是事务专用连接
-    private static Connection con = null;
+    private static ThreadLocal<Connection> tl = new ThreadLocal<Connection>();
 
     // 使用连接池返回一个连接对象
     public static Connection getConnection() throws SQLException {
+        Connection con = tl.get(); // 获取当前线程的连接
         // 当con不等于null，说明已经调用过beginTransaction(),表示开启了事务
         if (con != null)
             return con;
@@ -125,17 +126,21 @@ class JdbcUtils {
     // 2.把这个Connetion给Dao用
     // 3.还要让commitTransaction或rollbackTransaction可以获取到
     public static void beginTransaction() throws SQLException {
+        Connection con = tl.get(); // 获取当前线程的连接
         if (con != null)
             throw new SQLException("已经开启了事务，就不要重复开启了！");
         // 1.给con赋值
         // 2.给con设置为手动提交
         con = getConnection(); // 给con赋值，表示事务已经开启了
         con.setAutoCommit(false);
+
+        tl.set(con); // 把当前线程的连接保存起来
     }
 
     // 提交事务
     // 1.获取beginTransaction提供的Connection，然后调用commit()方法
     public static void commitTransaction() throws SQLException {
+        Connection con = tl.get(); // 获取当前线程的专用连接
         if (con == null)
             throw new SQLException("还没有开启事务，不能提交！");
         // 1.直接使用con.commit();
@@ -143,12 +148,14 @@ class JdbcUtils {
         con.close();
         // 把con设置为null，表示事务已经结束了
         // 下次再调用getConnection()，返回的就不是这个con了
-        con = null;
+        // con = null;
+        tl.remove(); // 从tl中移除线程
     }
 
     // 回滚
     // 1.获取beginTransaction提供的Connection，然后调用rollback()方法
     public static void rollbackTransaction() throws SQLException {
+        Connection con = tl.get(); // 获取当前线程的连接
         if (con == null)
             throw new SQLException("还没有开启事务，不能回滚！");
         // 1.直接调用con.rollback();
@@ -156,11 +163,13 @@ class JdbcUtils {
         con.close();
         // 把con设置为null，表示事务已经结束了
         // 下次再调用getConnection()，返回的就不是这个con了
-        con = null;
+        // con = null;
+        tl.remove();
     }
 
     // 释放连接
     public static void releaseConnection(Connection connection) throws SQLException {
+        Connection con = tl.get(); // 获取当前线程的连接
         // 判断它是不是事务专用
         // 如果是，就不关闭
         // 如果不是事务专用，就要关闭
