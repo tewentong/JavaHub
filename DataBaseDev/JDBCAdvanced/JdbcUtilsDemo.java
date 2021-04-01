@@ -158,17 +158,34 @@ class JdbcUtils {
         // 下次再调用getConnection()，返回的就不是这个con了
         con = null;
     }
+
+    public static void releaseConnection(Connection connection) throws SQLException {
+        // 判断它是不是事务专用
+        // 如果是，就不关闭
+        // 如果不是事务专用，就要关闭
+
+        // 如果con==null，说明现在没有事务，那么connection一定不是事务专用的
+        if (con == null)
+            connection.close();
+        // 如果con!=null，说明有事务，那么需要判断参数连接是否与con相等
+        // 若不等，说明参数连接不是事务专用连接
+        if (con != connection)
+            connection.close();
+
+        // 如果con!=null，是哦名有事务
+        // 而且con==connection，说明这是事务专用连接
+        // 所以不关闭此连接
+    }
 }
 
 class AccountDao0330 {
     public static void update(String name, double money) throws SQLException {
-        QueryRunner qr = new QueryRunner();
+        QueryRunner qr = new TxQueryRunner();
         String sql = "update account set balance = balance + ? WHERE name = ?";
         Object[] params = { money, name };
 
         // 我们需要自己来提供连接，保证多次调用使用的是同一个连接
-        Connection con = JdbcUtils.getConnection();
-        qr.update(con, sql, params);
+        qr.update(sql, params);
     }
 }
 
