@@ -159,6 +159,7 @@ class JdbcUtils {
         con = null;
     }
 
+    // 释放连接
     public static void releaseConnection(Connection connection) throws SQLException {
         // 判断它是不是事务专用
         // 如果是，就不关闭
