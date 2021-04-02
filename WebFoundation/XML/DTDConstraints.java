@@ -28,7 +28,22 @@
             (3)使用外部的dtd文件(使用网络的dtd文件)
                 <!DOCTYPE 根元素 PUBLIC "DTD名称" "DTD文档的URL">
                 后面会用到框架 struts2 使用配置文件 使用 外部的dtd文件
-                
+        使用dtd来定义元素
+            语法格式：<!ELEMENT 元素名 约束>
+            简单元素：没有子元素的元素  <!ELEMENT name (#PCDATA)>
+                    (#PCDATA)：约束name是字符串类型
+                    EMPTY：元素为空（没有内容）
+                    ANY：任意
+            复杂元素：<!ELEMENT person (name,age,sex,school)>   子元素只能出现一次
+                    <!ELEMENT 元素名称 (子元素)>
+                    表示子元素出现的次数：
+                        +   表示一次或多次
+                        ?   表示零次或一次
+                        *   表示零次、一次或多次
+                    子元素之间使用逗号(,)隔开
+                        表示元素出现的顺序
+                    子元素之间使用竖线(|)隔开
+                        表示元素只能出现其中任意一个
 */
 public class DTDConstraints {
     public static void main(String[] args) throws Exception {
