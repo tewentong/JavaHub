@@ -65,8 +65,20 @@
                 '                          &apos;
             例如：    
                 <a>a<b</a>    ---->    <a>a&lt;b</a>
-        CDATA区
-        PI指令
+        CDATA区(Character Data的缩写)
+            可以解决多个字符都需要转义的操作    if(a<b && b<c && d>f) {}
+            把这些内容放到CDATA区里面，不需要转义
+            写法：
+                <![CDATA[ 内容 ]]>
+                <![CDATA[ if(a<b && b<c && d>f) {} ]]>
+            可以把CDATA区内容当作普通文本内容，而不用当成标签进行解析:
+                <![CDATA[
+                    <itcast>www.itcast.cn</itcast>
+                ]]>
+        PI指令(处理指令--Processing Instruction)
+            可以在xml中设置样式
+            写法：<?xml-stylesheet type="text/css" href="css的路径"?>
+            注意：只能对英文标签名称起作用，对中文的标签名称不起作用
 */
 public class XMLIntro {
 
