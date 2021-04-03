@@ -1,11 +1,17 @@
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
+
+import sun.launcher.resources.launcher;
 
 /*
     XML解析的简介
@@ -118,6 +124,46 @@ import org.w3c.dom.Text;
                 zhangSan
     使用jaxp来添加节点
         需求：在第一个p1下面（末尾）添加<sex>nv</sex>
+        在第一个p1下面(末尾)添加<sex>nv</sex>
+            public static void addSex() throws Exception {
+                // 1.创建解析器工厂
+                // 2.根据解析器工厂创建解析器
+                // 3.解析xml返回document
+                // 4.得到第一个p1
+                // ----得到所有的p1，使用item方法下标得到
+                // 5.创建sex标签，createElement()
+                // 6.创建文本，createTextNode()
+                // 7.把文本添加到sex下面，appendChild()
+                // 8.把sex添加到第一个p1下面
+                // dom操作是在内存中操作，最后需要回写到person3.xml中
+                // 9.回写person3.xml
+
+                // 创建解析器工厂
+                DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+                // 创建解析器
+                DocumentBuilder builder = builderFactory.newDocumentBuilder();
+                // 得到Document
+                Document document = builder.parse("/home/kwj-at-lzu/Java/WebFoundation/XML/person3.xml");
+                // 得到所有的p1
+                NodeList list = document.getElementsByTagName("p1");
+                // 得到第一个p1
+                Node p1 = list.item(0);
+                // 创建标签（元素）
+                Element sex1 = document.createElement("sex");
+                // 创建文本
+                Text text1 = document.createTextNode("nv");
+                // 把文本添加到text1下面
+                sex1.appendChild(text1);
+                // 把sex1添加到p1下面
+                p1.appendChild(sex1);
+                // 回写到xml中
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                transformer.transform(new DOMSource(document),
+                        new StreamResult("/home/kwj-at-lzu/Java/WebFoundation/XML/person3.xml"));
+            }
+    使用jaxp来修改节点
+        需求：修改第一个p1下面sex内容为nan
 
 */
 public class XMLParsers {
@@ -201,6 +247,37 @@ public class XMLParsers {
         // 把sex1添加到p1下面
         p1.appendChild(sex1);
         // 回写到xml中
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        transformer.transform(new DOMSource(document),
+                new StreamResult("/home/kwj-at-lzu/Java/WebFoundation/XML/person3.xml"));
+    }
+
+    // 需求：修改第一个p1下面sex内容为nan
+    public static void modifySex() throws Exception {
+        // 1.创建解析器工厂
+        // 2.根据解析器工厂创建解析器
+        // 3.解析xml返回document
+        // 4.得到sex item()
+        // 5.修改sex里面的值 setTextContent()
+        // 6.回写xml
+
+        // 创建解析器工厂
+        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+        // 创建解析器
+        DocumentBuilder builder = builderFactory.newDocumentBuilder();
+        // 得到Document
+        Document document = builder.parse("/home/kwj-at-lzu/Java/WebFoundation/XML/person3.xml");
+        // 得到sex
+        Node sex1 = document.getElementsByTagName("sex").item(0);
+        // 修改sex的值
+        sex1.setTextContent("nan");
+        // 回写
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        transformer.transform(new DOMSource(document),
+                new StreamResult("/home/kwj-at-lzu/Java/WebFoundation/XML/person3.xml"));
+
     }
 
     public static void main(String[] args) throws Exception {
@@ -209,5 +286,6 @@ public class XMLParsers {
         selectSin();
 
         addSex();
+        modifySex();
     }
 }
