@@ -21,9 +21,11 @@
     <!ATTLIST birthday
         ID1 CDATA #REQUIRED
     >
+
+    <!ENTITY TEST "HAHAHEHE">
 ]>
 <person>
-    <name ID3="A222">zhangsan1</name>
+    <name ID3="A222">&TEST;</name>
     <age ID2="AA">20</age>
     <sex ID4="ABC"></sex>
     <school ID5="www">1111</school>

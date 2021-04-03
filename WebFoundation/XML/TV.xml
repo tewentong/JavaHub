@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE TVSCHEDULE SYSTEM "TV.dtd">
+<TVSCHEDULE NAME="CCTV">
+    <CHANNEL CHAN="CCCC">
+        <BANNER>aaa</BANNER>
+        <DAY>
+            <DATE>2021-04-03</DATE>
+            <HOLIDAY>xxxxx</HOLIDAY>
+        </DAY>
+        <DAY>
+            <DATE>2021-05-03</DATE>
+            <PROGRAMSLOT VTR="SSSS">
+                <TIME>1990</TIME>
+                <TITLE RATING="BBBB">test</TITLE>
+            </PROGRAMSLOT>
+        </DAY>
+    </CHANNEL>
+</TVSCHEDULE>

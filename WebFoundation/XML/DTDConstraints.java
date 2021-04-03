@@ -71,6 +71,16 @@
                 直接值：表示属性的取值为该默认值
                     不写属性，使用直接值
                     写了属性，使用设置的那个值
+        使用dtd来定义引用实体
+            概念：在DTD中定义，在XML中使用
+            语法：<!ENTITY 实体名称 "实体内容">
+                DTD中定义：
+                    <!ENTITY TEST "HAHAHEHE">
+                注意：
+                    定义实体需要写在内部dtd里面，如果写在外部的dtd里面，在某些浏览器下，内容得不到
+            应用方式(注意是在XML中使用)：&实体名称
+                XML中引用：
+                    &TEST;
 */
 public class DTDConstraints {
     public static void main(String[] args) throws Exception {
