@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<person>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><person>
     <p1>
         <name>zhangSan</name>
         <age>20</age>
         <sex>nan</sex>
-        <sex>nv</sex>
+        
     </p1>
     <p1>
         <name>liSi</name>

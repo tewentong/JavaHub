@@ -123,7 +123,7 @@ import sun.launcher.resources.launcher;
             程序输出：
                 zhangSan
     使用jaxp来添加节点
-        需求：在第一个p1下面（末尾）添加<sex>nv</sex>
+        需求：在person3.xml第一个p1下面（末尾）添加<sex>nv</sex>
         在第一个p1下面(末尾)添加<sex>nv</sex>
             public static void addSex() throws Exception {
                 // 1.创建解析器工厂
@@ -163,8 +163,107 @@ import sun.launcher.resources.launcher;
                         new StreamResult("/home/kwj-at-lzu/Java/WebFoundation/XML/person3.xml"));
             }
     使用jaxp来修改节点
-        需求：修改第一个p1下面sex内容为nan
+        需求：修改person3.xml中第一个p1下面sex内容为nan
+        public static void modifySex() throws Exception {
+            // 1.创建解析器工厂
+            // 2.根据解析器工厂创建解析器
+            // 3.解析xml返回document
+            // 4.得到sex item()
+            // 5.修改sex里面的值 setTextContent()
+            // 6.回写xml
 
+            // 创建解析器工厂
+            DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+            // 创建解析器
+            DocumentBuilder builder = builderFactory.newDocumentBuilder();
+            // 得到Document
+            Document document = builder.parse("/home/kwj-at-lzu/Java/WebFoundation/XML/person3.xml");
+            // 得到sex
+            Node sex1 = document.getElementsByTagName("sex").item(0);
+            // 修改sex的值
+            sex1.setTextContent("nan");
+            // 回写
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.transform(new DOMSource(document),
+                    new StreamResult("/home/kwj-at-lzu/Java/WebFoundation/XML/person3.xml"));
+
+        }
+    使用jaxp来删除节点
+        需求：删除<sex>nan</nan>节点
+        public static void delSex() throws Exception {
+            // 1.创建解析器工厂
+            // 2.根据解析器工厂创建解析器
+            // 3.解析xml返回document
+            // 4.获取sex元素
+            // 5.获取sex的父节点 getParentNode()
+            // 6.删除使用父节点删除 removeChild方法
+            // 7.回写xml操作
+
+            // 创建解析器工厂
+            DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+            // 创建解析器
+            DocumentBuilder builder = builderFactory.newDocumentBuilder();
+            // 得到Document
+            Document document = builder.parse("/home/kwj-at-lzu/Java/WebFoundation/XML/person3.xml");
+            // 得到sex元素
+            Node sex2 = document.getElementsByTagName("sex").item(1);
+            // 得到sex1的父节点
+            Node p1 = sex2.getParentNode();
+            // 删除操作
+            p1.removeChild(sex2);
+            // 回写xml
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.transform(new DOMSource(document),
+                    new StreamResult("/home/kwj-at-lzu/Java/WebFoundation/XML/person3.xml"));
+        }
+    使用jaxp来遍历节点
+        需求：把person3.xml中的所有元素名称打印出来
+        public static void listElement() throws Exception {
+            // 1.创建解析器工厂
+            // 2.根据解析器工厂创建解析器
+            // 3.解析xml返回document
+            // =============使用递归实现操作====================
+            // 4.得到根节点
+            // 5.得到根节点的子节点
+
+            // 创建解析器工厂
+            DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+            // 创建解析器
+            DocumentBuilder builder = builderFactory.newDocumentBuilder();
+            // 得到Document
+            Document document = builder.parse("/home/kwj-at-lzu/Java/WebFoundation/XML/person3.xml");
+
+            // 编写一个方法实现遍历操作
+            listRecursion(document);
+        }
+
+        递归遍历操作
+        private static void listRecursion(Node node) {
+            // 判断是元素类型时候才打印
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                System.out.println(node.getNodeName());
+            }
+            // 得到一层子节点
+            NodeList list = node.getChildNodes();
+            // 遍历list
+            for (int i = 0; i < list.getLength(); i++) {
+                // 得到每一个节点
+                Node nodeI = list.item(i);
+                // 继续得到nodeI的子节点
+                listRecursion(nodeI);
+            }
+        }
+        程序输出：
+            person
+            p1
+            name
+            age
+            sex
+            p1
+            name
+            age
 */
 public class XMLParsers {
     // 查询person3.xml中所有name的值
@@ -280,12 +379,81 @@ public class XMLParsers {
 
     }
 
-    public static void main(String[] args) throws Exception {
-        selectAll();
-        System.out.println("--------------------------------------");
-        selectSin();
+    // 删除<sex>nan<sex>节点
+    public static void delSex() throws Exception {
+        // 1.创建解析器工厂
+        // 2.根据解析器工厂创建解析器
+        // 3.解析xml返回document
+        // 4.获取sex元素
+        // 5.获取sex的父节点 getParentNode()
+        // 6.删除使用父节点删除 removeChild方法
+        // 7.回写xml操作
 
-        addSex();
-        modifySex();
+        // 创建解析器工厂
+        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+        // 创建解析器
+        DocumentBuilder builder = builderFactory.newDocumentBuilder();
+        // 得到Document
+        Document document = builder.parse("/home/kwj-at-lzu/Java/WebFoundation/XML/person3.xml");
+        // 得到sex元素
+        Node sex2 = document.getElementsByTagName("sex").item(1);
+        // 得到sex1的父节点
+        Node p1 = sex2.getParentNode();
+        // 删除操作
+        p1.removeChild(sex2);
+        // 回写xml
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        transformer.transform(new DOMSource(document),
+                new StreamResult("/home/kwj-at-lzu/Java/WebFoundation/XML/person3.xml"));
     }
+
+    // 遍历节点，把所有元素的名称打印出来
+    public static void listElement() throws Exception {
+        // 1.创建解析器工厂
+        // 2.根据解析器工厂创建解析器
+        // 3.解析xml返回document
+        // =============使用递归实现操作====================
+        // 4.得到根节点
+        // 5.得到根节点的子节点
+
+        // 创建解析器工厂
+        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+        // 创建解析器
+        DocumentBuilder builder = builderFactory.newDocumentBuilder();
+        // 得到Document
+        Document document = builder.parse("/home/kwj-at-lzu/Java/WebFoundation/XML/person3.xml");
+
+        // 编写一个方法实现遍历操作
+        listRecursion(document);
+    }
+
+    // 递归遍历操作
+    private static void listRecursion(Node node) {
+        // 判断是元素类型时候才打印
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
+            System.out.println(node.getNodeName());
+        }
+        // 得到一层子节点
+        NodeList list = node.getChildNodes();
+        // 遍历list
+        for (int i = 0; i < list.getLength(); i++) {
+            // 得到每一个节点
+            Node nodeI = list.item(i);
+            // 继续得到nodeI的子节点
+            listRecursion(nodeI);
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        // selectAll();
+        // System.out.println("--------------------------------------");
+        // selectSin();
+
+        // addSex();
+        // modifySex();
+        // delSex();
+        listElement();
+    }
+
 }
