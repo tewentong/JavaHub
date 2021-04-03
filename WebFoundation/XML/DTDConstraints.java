@@ -44,6 +44,33 @@
                         表示元素出现的顺序
                     子元素之间使用竖线(|)隔开
                         表示元素只能出现其中任意一个
+        使用dtd来定义属性
+            语法：<!ATTLIST 元素名称
+                        属性名称 属性类型 属性的约束
+                 >
+            属性值类型：
+                CDATA：表示属性的区值为普通的文本字符串
+                    <!ATTLIST birthday
+                        ID1 CDATA #REQUIRED
+                    >
+                ENUMERATED(DTD没有此关键字)：表示枚举，只能从枚举列表中任选其一，如(鸡肉|牛肉|猪肉|鱼肉)
+                    <!ATTLIST age
+                        ID2 (AA|BB|CC) #REQUIRED
+                    >
+                ID：表示属性的取值不能重复，属性的值只能由字母，下划线开始，不能出现空白字符
+                    <!ATTLIST name
+                        ID3 ID #REQUIRED
+                    >
+            属性约束设置说明
+                #REQUIRED：表示该属性必须出现
+                #IMPLIED：表示该属性可有可无
+                #FIXED：表示属性的取值为一个固定值。语法: #FIXED '固定值'
+                    <!ATTLIST sex
+                        ID4 CDATA $FIXED "ABC"
+                    >
+                直接值：表示属性的取值为该默认值
+                    不写属性，使用直接值
+                    写了属性，使用设置的那个值
 */
 public class DTDConstraints {
     public static void main(String[] args) throws Exception {

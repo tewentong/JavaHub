@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE person [
+    <!ELEMENT person (name+,age?,sex*,school,birthday)>
+    <!ELEMENT name (#PCDATA)>
+    <!ATTLIST name
+        ID3 ID #REQUIRED
+    >
+    <!ELEMENT age (#PCDATA)>
+    <!ATTLIST age
+        ID2 (AA|BB|CC) #REQUIRED
+    >
+    <!ELEMENT sex (#PCDATA)>
+    <!ATTLIST sex
+        ID4 CDATA #FIXED "ABC"
+    >
+    <!ELEMENT school ANY>
+    <!ATTLIST school
+        ID5 CDATA "www"
+    >
+    <!ELEMENT birthday (#PCDATA)>
+    <!ATTLIST birthday
+        ID1 CDATA #REQUIRED
+    >
+]>
+<person>
+    <name ID3="A222">zhangsan1</name>
+    <age ID2="AA">20</age>
+    <sex ID4="ABC"></sex>
+    <school ID5="www">1111</school>
+    <birthday ID1="AAA">2015</birthday>
+</person>
