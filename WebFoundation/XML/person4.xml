@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <person xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns="http://www.itcast.cn/20151111"
-xsi:schemaLocation="http://www.itcast.cn/20151111 /home/kwj-at-lzu/Java/WebFoundation/XML/schemaDemo.xsd">
+xsi:schemaLocation="http://www.itcast.cn/20151111 /home/kwj-at-lzu/Java/WebFoundation/XML/schemaDemo.xsd"
+id1="123">
     <name>zhangSan</name>
     <age>20</age>
 </person>

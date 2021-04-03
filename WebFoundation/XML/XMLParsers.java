@@ -11,8 +11,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
-import sun.launcher.resources.launcher;
-
 /*
     XML解析的简介
         xml是标记型文档

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<note
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://www.itcast.cn/20140213"
+xsi:schemaLocation="http://www.itcast.cn/20140213 /home/kwj-at-lzu/Java/WebFoundation/XML/node.xsd">
+    <to>George</to>
+    <from>John</from>
+    <heading>Remainder</heading>
+    <body>Don't forget the meeting!</body>
+</note>

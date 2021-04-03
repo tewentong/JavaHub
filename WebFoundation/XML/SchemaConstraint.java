@@ -55,6 +55,21 @@
                     是约束文档里面targetNamespace
                 xsi:schemaLocation="http://www.itcast.cn/20151111 /home/kwj-at-lzu/Java/WebFoundation/XML/schemaDemo.xsd"
                     targetNamespace 空格 约束文档的地址路径
+    XML Schema复杂元素指示器
+        ALL：元素只能出现一次
+        Choice：元素只能出现其中的一个
+        Sequence：元素按照顺序出现
+        maxOccurs="unbounded"表示出现次数没限制
+            <element name="name" type="double" maxOccurs="unbounded"/>
+        约束属性：
+            写在复杂元素里面
+            写在</complexType>之前
+            <attribute name="p1" type="string" use="required"></attribute>
+                name：属性名称
+                type：属性类型 int string
+                use：属性是否必须出现，required表示属性必须要出现    
+        <any></any>：表示任意元素
+            
 */
 public class SchemaConstraint {
 
