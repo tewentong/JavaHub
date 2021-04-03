@@ -69,7 +69,20 @@
                 type：属性类型 int string
                 use：属性是否必须出现，required表示属性必须要出现    
         <any></any>：表示任意元素
-            
+        复杂的schema约束：
+            <company xmlns="http://www.example.org/company"
+            xmlns:dept="http://www.example.org/department"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.example.org/company company.xsd http://www.example.org/department department.xsd">
+            引入多个schema文件，可以给每个起一个别名
+
+            <employee age="30">
+                <!--部门名称-->
+                <dept:name>100<dept:name>
+                <!--想要引入部门的约束文件里面的name, 使用部门的别名 dept:元素名称-->
+                <!--员工名称-->
+                <name>wangxiaoxiao<name>
+            </employee>
 */
 public class SchemaConstraint {
 
