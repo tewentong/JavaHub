@@ -1,8 +1,11 @@
+import java.io.FileOutputStream;
 import java.util.List;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
+import org.dom4j.io.XMLWriter;
 
 /*
     使用dom4j解析XML文件
@@ -103,6 +106,38 @@ import org.dom4j.io.SAXReader;
                 String s = secondName.getText();
                 System.out.println(s);
             }
+    使用dom4j实现添加操作
+        需求：在p2.xml文件的末尾添加一个元素 <sex>nv</sex>
+            public static void addSex() throws Exception {
+                // 1.创建解析器
+                // 2.得到document
+                // 3.得到根节点
+                // 4.获取第一个p1
+                // 5.在p1下面添加元素
+                // 6.在添加完成之后元素下面添加文本
+                // 7.回写xml文件
+
+                // 创建解析器
+                SAXReader saxReader = new SAXReader();
+                // 得到document
+                Document document = saxReader.read("/home/kwj-at-lzu/Java/WebFoundation/XML/p2.xml");
+                // 得到根节点
+                Element root = document.getRootElement();
+                // 得到第一个p1
+                Element firstP1 = root.element("p1");
+                // 在p1下面直接添加元素
+                Element addSex = firstP1.addElement("sex");
+                // 在添加完成的元素addSex下面添加文本
+                addSex.setText("nv");
+                // 回写xml文件
+                OutputFormat format = OutputFormat.createPrettyPrint(); // 表示可以有缩进的格式效果
+                // OutputFormat format2 = OutputFormat.createCompactFormat();  // 压缩的格式，最后的文件完全没有缩进
+                XMLWriter xmlWriter = new XMLWriter(new FileOutputStream("/home/kwj-at-lzu/Java/WebFoundation/XML/p2.xml"),
+                        format);
+                xmlWriter.write(document);// 把内存中的document写到文件里面
+                // 关闭流
+                xmlWriter.close();
+            }
 */
 public class Dom4jParser {
     // 查询xml中所有name元素的值
@@ -189,11 +224,45 @@ public class Dom4jParser {
         System.out.println(s);
     }
 
+    // 在p2.xml文件的末尾添加<sex>nv</sex>
+    public static void addSex() throws Exception {
+        // 1.创建解析器
+        // 2.得到document
+        // 3.得到根节点
+        // 4.获取第一个p1
+        // 5.在p1下面添加元素
+        // 6.在添加完成之后元素下面添加文本
+        // 7.回写xml文件
+
+        // 创建解析器
+        SAXReader saxReader = new SAXReader();
+        // 得到document
+        Document document = saxReader.read("/home/kwj-at-lzu/Java/WebFoundation/XML/p2.xml");
+        // 得到根节点
+        Element root = document.getRootElement();
+        // 得到第一个p1
+        Element firstP1 = root.element("p1");
+        // 在p1下面直接添加元素
+        Element addSex = firstP1.addElement("sex");
+        // 在添加完成的元素addSex下面添加文本
+        addSex.setText("nv");
+        // 回写xml文件
+        OutputFormat format = OutputFormat.createPrettyPrint(); // 表示可以有缩进的格式效果
+        // 压缩的格式，最后的文件完全没有缩进
+        // OutputFormat format2 = OutputFormat.createCompactFormat();
+        XMLWriter xmlWriter = new XMLWriter(new FileOutputStream("/home/kwj-at-lzu/Java/WebFoundation/XML/p2.xml"),
+                format);
+        xmlWriter.write(document);// 把内存中的document写到文件里面
+        // 关闭流
+        xmlWriter.close();
+    }
+
     public static void main(String[] args) throws Exception {
         queryName();
         System.out.println("---------------------------------------------");
         queryFirstName();
         System.out.println("---------------------------------------------");
         querySecondName();
+        addSex();
     }
 }
