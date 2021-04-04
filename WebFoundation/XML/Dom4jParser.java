@@ -178,7 +178,50 @@ import org.dom4j.io.XMLWriter;
             }
     使用dom4j实现修改节点的操作
         需求：修改p2.xml文件中第一个p1下面的age元素的值，改为<age>30</age>
+            public static void modifyAge() throws Exception {
+                // 1.得到document
+                // 2.得到根节点，然后再得到第一个p1的元素
+                // 3.得到第一个p1下面的age元素
+                // 4.修改值为30
+                // 5.回写xml
 
+                // 得到document
+                Document document = Dom4jUtils.getDocument(Dom4jUtils.PATH);
+                // 得到根节点，然后再得到第一个p1
+                Element root = document.getRootElement();
+                Element firstP1 = root.element("p1");
+                // 得到第一个p1下面的age元素
+                Element age = firstP1.element("age");
+                // 修改age值为30
+                age.setText("300");
+                // 回写xml
+                Dom4jUtils.xmlWriters(Dom4jUtils.PATH, document);
+            }
+    使用dom4j来实现删除节点的操作
+        删除是通过父节点执行删除操作
+        需求：删除p2.xml文件中第一个p1下面的<school>ecit.edu.cn</school>元素
+            public static void deleteSchool() throws Exception {
+                // 1.得到document
+                // 2.得到根节点
+                // 3.得到第一个p1标签
+                // 4.得到第一个p1下面的school元素
+                // 5.删除school（使用父节点p1删除school）
+                // 6.回写xml
+
+                // 得到document
+                Document document = Dom4jUtils.getDocument(Dom4jUtils.PATH);
+                // 得到根节点
+                Element root = document.getRootElement();
+                // 得到第一个p1标签
+                Element firstP1 = root.element("p1");
+                // 得到第一个p1下面的school元素
+                Element school = firstP1.element("school");
+                // 借助父节点firstP1来删除school
+                // school.getParent(); //获取父节点
+                firstP1.remove(school);
+                // 回写
+                Dom4jUtils.xmlWriters(Dom4jUtils.PATH, document);
+            }
 */
 public class Dom4jParser {
     // 查询xml中所有name元素的值
@@ -356,6 +399,30 @@ public class Dom4jParser {
         Dom4jUtils.xmlWriters(Dom4jUtils.PATH, document);
     }
 
+    // 删除p2.xml文件中第一个p1下面的<school>ecit.edu.cn</school>元素
+    public static void deleteSchool() throws Exception {
+        // 1.得到document
+        // 2.得到根节点
+        // 3.得到第一个p1标签
+        // 4.得到第一个p1下面的school元素
+        // 5.删除school（使用父节点p1删除school）
+        // 6.回写xml
+
+        // 得到document
+        Document document = Dom4jUtils.getDocument(Dom4jUtils.PATH);
+        // 得到根节点
+        Element root = document.getRootElement();
+        // 得到第一个p1标签
+        Element firstP1 = root.element("p1");
+        // 得到第一个p1下面的school元素
+        Element school = firstP1.element("school");
+        // 借助父节点firstP1来删除school
+        // school.getParent(); //获取父节点
+        firstP1.remove(school);
+        // 回写
+        Dom4jUtils.xmlWriters(Dom4jUtils.PATH, document);
+    }
+
     public static void main(String[] args) throws Exception {
         queryName();
         System.out.println("---------------------------------------------");
@@ -364,6 +431,7 @@ public class Dom4jParser {
         querySecondName();
         // addSex();
         // addSchoolBeforeAge();
-        modifyAge();
+        // modifyAge();
+        deleteSchool();
     }
 }
