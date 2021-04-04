@@ -176,6 +176,9 @@ import org.dom4j.io.XMLWriter;
                 xmlWriter.write(document);
                 xmlWriter.close();
             }
+    使用dom4j实现修改节点的操作
+        需求：修改p2.xml文件中第一个p1下面的age元素的值，改为<age>30</age>
+
 */
 public class Dom4jParser {
     // 查询xml中所有name元素的值
@@ -332,6 +335,27 @@ public class Dom4jParser {
         xmlWriter.close();
     }
 
+    // 修改p2.xml文件中第一个p1下面的age元素的值，改为<age>30</age>
+    public static void modifyAge() throws Exception {
+        // 1.得到document
+        // 2.得到根节点，然后再得到第一个p1的元素
+        // 3.得到第一个p1下面的age元素
+        // 4.修改值为30
+        // 5.回写xml
+
+        // 得到document
+        Document document = Dom4jUtils.getDocument(Dom4jUtils.PATH);
+        // 得到根节点，然后再得到第一个p1
+        Element root = document.getRootElement();
+        Element firstP1 = root.element("p1");
+        // 得到第一个p1下面的age元素
+        Element age = firstP1.element("age");
+        // 修改age值为30
+        age.setText("300");
+        // 回写xml
+        Dom4jUtils.xmlWriters(Dom4jUtils.PATH, document);
+    }
+
     public static void main(String[] args) throws Exception {
         queryName();
         System.out.println("---------------------------------------------");
@@ -339,6 +363,7 @@ public class Dom4jParser {
         System.out.println("---------------------------------------------");
         querySecondName();
         // addSex();
-        addSchoolBeforeAge();
+        // addSchoolBeforeAge();
+        modifyAge();
     }
 }

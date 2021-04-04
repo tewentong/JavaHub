@@ -1,3 +1,5 @@
+import java.io.FileOutputStream;
+
 import org.dom4j.Document;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
@@ -8,7 +10,7 @@ import org.dom4j.io.XMLWriter;
 */
 public class Dom4jUtils {
     // xml文件路径
-    public static final String PATH = "";
+    public static final String PATH = "/home/kwj-at-lzu/Java/WebFoundation/XML/p2.xml";
 
     // 返回document
     public static Document getDocument(String path) {
