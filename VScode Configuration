@@ -31,6 +31,7 @@
             "/home/kwj-at-lzu/VSCode/jar/commons-dbutils-1.6.jar",
             "/home/kwj-at-lzu/VSCode/jar/javax.servlet-api-4.0.1.jar",
             "/home/kwj-at-lzu/VSCode/jar/dom4j-1.6.1.jar",
+            "/home/kwj-at-lzu/VSCode/jar/jaxen-1.1.6.jar",
         ]
     },
 }
