@@ -2,6 +2,7 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
@@ -138,6 +139,43 @@ import org.dom4j.io.XMLWriter;
                 // 关闭流
                 xmlWriter.close();
             }
+    使用dom4j在特定的位置添加元素
+        需求：在p2.xml文件第一个p1下面的age标签之前添加<school>ecit.edu.cn</school>
+            public static void addSchoolBeforeAge() throws Exception {
+                // 1.创建解析器
+                // 2.得到document
+                // 3.得到根节点
+                // 4.获取第一个p1
+                // 5.获取p1下面的所有的元素
+                // --->elements()方法，返回List集合
+                // --->使用list里面的方法，在特定位置添加元素
+                // --->创建元素，并在新创建的元素下面添加文本
+                // ------->add(int index, E element);第一个参数下标从0开始，第二个参数是要添加的元素
+                // 6.回写xml
+
+                // 创建解析器
+                SAXReader saxReader = new SAXReader();
+                // 得到document
+                Document document = saxReader.read("/home/kwj-at-lzu/Java/WebFoundation/XML/p2.xml");
+                // 得到根节点
+                Element root = document.getRootElement();
+                // 得到第一个p1
+                Element firstP1 = root.element("p1");
+                // 返回包含p1所有子元素的List集合
+                List<Element> list = firstP1.elements();
+                // 创建需要添加的元素，使用帮助类DocumentHelper
+                Element schoolElement = DocumentHelper.createElement("school");
+                // 在新元素schoolElement下面追加文本信息
+                schoolElement.setText("ecit.edu.cn");
+                // 在list特定位置添加元素
+                list.add(1, schoolElement);
+                // 将内存中的操作回写到p2.xml文件当中
+                OutputFormat format = OutputFormat.createPrettyPrint();
+                XMLWriter xmlWriter = new XMLWriter(new FileOutputStream("/home/kwj-at-lzu/Java/WebFoundation/XML/p2.xml"),
+                        format);
+                xmlWriter.write(document);
+                xmlWriter.close();
+            }
 */
 public class Dom4jParser {
     // 查询xml中所有name元素的值
@@ -257,12 +295,50 @@ public class Dom4jParser {
         xmlWriter.close();
     }
 
+    // 在p2.xml文件第一个p1下面的age标签之前添加<school>ecit.edu.cn</school>
+    public static void addSchoolBeforeAge() throws Exception {
+        // 1.创建解析器
+        // 2.得到document
+        // 3.得到根节点
+        // 4.获取第一个p1
+        // 5.获取p1下面的所有的元素
+        // --->elements()方法，返回List集合
+        // --->使用list里面的方法，在特定位置添加元素
+        // --->创建元素，并在新创建的元素下面添加文本
+        // ------->add(int index, E element);第一个参数下标从0开始，第二个参数是要添加的元素
+        // 6.回写xml
+
+        // 创建解析器
+        SAXReader saxReader = new SAXReader();
+        // 得到document
+        Document document = saxReader.read("/home/kwj-at-lzu/Java/WebFoundation/XML/p2.xml");
+        // 得到根节点
+        Element root = document.getRootElement();
+        // 得到第一个p1
+        Element firstP1 = root.element("p1");
+        // 返回包含p1所有子元素的List集合
+        List<Element> list = firstP1.elements();
+        // 创建需要添加的元素，使用帮助类DocumentHelper
+        Element schoolElement = DocumentHelper.createElement("school");
+        // 在新元素schoolElement下面追加文本信息
+        schoolElement.setText("ecit.edu.cn");
+        // 在list特定位置添加元素
+        list.add(1, schoolElement);
+        // 将内存中的操作回写到p2.xml文件当中
+        OutputFormat format = OutputFormat.createPrettyPrint();
+        XMLWriter xmlWriter = new XMLWriter(new FileOutputStream("/home/kwj-at-lzu/Java/WebFoundation/XML/p2.xml"),
+                format);
+        xmlWriter.write(document);
+        xmlWriter.close();
+    }
+
     public static void main(String[] args) throws Exception {
         queryName();
         System.out.println("---------------------------------------------");
         queryFirstName();
         System.out.println("---------------------------------------------");
         querySecondName();
-        addSex();
+        // addSex();
+        addSchoolBeforeAge();
     }
 }
