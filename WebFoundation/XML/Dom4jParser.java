@@ -222,6 +222,24 @@ import org.dom4j.io.XMLWriter;
                 // 回写
                 Dom4jUtils.xmlWriters(Dom4jUtils.PATH, document);
             }
+    使用dom4j获取属性
+        需求：获取p2.xml文件中第一个p1里面的id1的属性值
+            public static void getAttributeValue() throws Exception {
+                // 1.得到document
+                // 2.得到根节点
+                // 3.得到第一个p1元素
+                // 4.得到第一个p1里面的属性值
+
+                // 得到document
+                Document document = Dom4jUtils.getDocument(Dom4jUtils.PATH);
+                // 得到根节点
+                Element root = document.getRootElement();
+                // 得到第一个p1元素
+                Element firstP1 = root.element("p1");
+                // 得到第一个p1的属性值
+                String id1 = firstP1.attributeValue("id1");
+                System.out.println(id1);
+            }
 */
 public class Dom4jParser {
     // 查询xml中所有name元素的值
@@ -423,6 +441,24 @@ public class Dom4jParser {
         Dom4jUtils.xmlWriters(Dom4jUtils.PATH, document);
     }
 
+    // 获取p2.xml文件中第一个p1里面的id1的属性值
+    public static void getAttributeValue() throws Exception {
+        // 1.得到document
+        // 2.得到根节点
+        // 3.得到第一个p1元素
+        // 4.得到第一个p1里面的属性值
+
+        // 得到document
+        Document document = Dom4jUtils.getDocument(Dom4jUtils.PATH);
+        // 得到根节点
+        Element root = document.getRootElement();
+        // 得到第一个p1元素
+        Element firstP1 = root.element("p1");
+        // 得到第一个p1的属性值
+        String id1 = firstP1.attributeValue("id1");
+        System.out.println(id1);
+    }
+
     public static void main(String[] args) throws Exception {
         queryName();
         System.out.println("---------------------------------------------");
@@ -432,6 +468,8 @@ public class Dom4jParser {
         // addSex();
         // addSchoolBeforeAge();
         // modifyAge();
-        deleteSchool();
+        // deleteSchool();
+        System.out.println("---------------------------------------------");
+        getAttributeValue();
     }
 }
