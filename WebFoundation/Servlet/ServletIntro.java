@@ -37,29 +37,36 @@ import javax.servlet.ServletResponse;
 */
 
 public class ServletIntro implements Servlet {
-
+    // 生命周期方法
+    // 它会在Servlet对象被销毁之前被Tomcat调用，并且它只调用一次
     @Override
     public void destroy() {
         System.out.println("destroy()...");
     }
 
+    // 获取Servlet的配置信息
     @Override
     public ServletConfig getServletConfig() {
         System.out.println("getServletConfig()...");
         return null;
     }
 
+    // 获取Servlet的信息
     @Override
     public String getServletInfo() {
         System.out.println("getServletInfo()...");
-        return null;
+        return "我是一个快乐Servlet";
     }
 
+    // 生命周期方法
+    // 它会在Servlet对象创建之后马上执行，并只执行一次！（出生之后）
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
         System.out.println("servletConfig()...");
     }
 
+    // 生命周期方法
+    // 它会被多次调用，每次处理请求都是在调用此方法
     @Override
     public void service(ServletRequest servletRequest, ServletResponse servletResponse)
             throws ServletException, IOException {
